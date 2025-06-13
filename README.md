@@ -43,6 +43,28 @@ It learns from manuals, logs, config files, and community input to help:
 
 ---
 
+## 🧠 How It Learns
+
+21Hash is designed to continuously evolve through a layered learning approach:
+
+### Phase 1 – Static Prompting (Now)
+- Uses a pre-engineered system prompt and GPT-4
+- Answers drawn from curated mining manuals, firmware docs, and optimization guides
+
+### Phase 2 – Community-Driven Learning (Next)
+- Logs unanswered or low-confidence questions
+- Contributors submit improved responses and new data
+- Expands knowledge base with real miner questions and feedback
+
+### Phase 3 – Operational Intelligence (Future)
+- Accepts JSON logs, configuration files, and performance data
+- Analyzes miner behavior, temperature, efficiency, uptime
+- Adds validated insights into a searchable knowledge graph or vector database
+
+This progressive learning loop allows 21Hash to grow smarter over time, while staying grounded in open contributions and real-world mining practices. By opening up the development of Bitcoin mining hardware and software, 21Hash helps distribute intelligence and hashrate across the global network.
+
+---
+
 ## 📦 Phase 1 – MVP Features
 - Public chatbot UI (Streamlit)
 - Answers common questions about:
