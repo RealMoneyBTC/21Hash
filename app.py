@@ -1,8 +1,8 @@
 import streamlit as st
 import requests
 
-# Your Hugging Face Space API endpoint
-api_url = "https://RealMoneyBTC-21hash-assistant.hf.space/predict"
+# Hugging Face Inference API with public GPT-2 model
+api_url = "https://api-inference.huggingface.co/models/gpt2"
 
 st.set_page_config(page_title="21Hash - Bitcoin Mining Assistant", layout="wide")
 
@@ -11,20 +11,25 @@ st.markdown("Ask anything about Bitcoin mining hardware, firmware, setup, or opt
 
 with st.sidebar:
     st.markdown("## Settings")
-    st.markdown("This version connects to your Hugging Face Space for responses.")
+    st.markdown("This version connects to Hugging Face Inference API (GPT-2 public model).")
     st.markdown("---")
     st.markdown("### 🔐 Privacy")
     st.markdown(
-        "No IP addresses or personal identifiers are collected. Prompts are sent to your Hugging Face Space API."
+        "No IP addresses or personal identifiers are collected. Prompts are sent to Hugging Face Inference API."
     )
     st.markdown("---")
     st.markdown("Created by the community for the community. [GitHub Repo](https://github.com/RealMoneyBTC/21Hash)")
 
 def query_huggingface(prompt):
+    headers = {"Authorization": f"Bearer {st.secrets['HF_TOKEN']}"}
     try:
-        response = requests.post(api_url, json={"prompt": prompt})
+        response = requests.post(api_url, headers=headers, json={"inputs": prompt})
         if response.status_code == 200:
-            return response.json()["response"]
+            result = response.json()
+            if isinstance(result, list):
+                return result[0]["generated_text"]
+            else:
+                return result.get("generated_text", str(result))
         else:
             st.error(f"API error: {response.status_code} {response.text}")
             return None
