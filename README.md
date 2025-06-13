@@ -65,6 +65,20 @@ This progressive learning loop allows 21Hash to grow smarter over time, while st
 
 ---
 
+## ⚡ Model Use in Phase 1
+
+21Hash defaults to **gpt-3.5-turbo** in Phase 1. This ensures cost efficiency while providing strong answers for most Bitcoin mining questions.
+
+- **gpt-3.5-turbo**: Fast, affordable, suitable for typical hardware, firmware, and setup Q&A.
+- **gpt-4**: Higher cost, deeper reasoning, better for complex or edge-case queries (optional for those running their own version).
+
+We have chosen to use OpenAI models initially to focus on rapid deployment, reliability, and proven performance. Our intention is to transition toward **open-source models** (e.g., LLaMA, Mistral, Mixtral) in future phases to further decentralize and democratize mining intelligence. The timeframe for this transition is dependent on community support and technical milestones but is a core long-term goal.
+
+### Using Other Models
+Those deploying 21Hash from this repo are free to adjust the model configuration. In `app.py`, simply change the `model=` parameter in the OpenAI API call to your desired model (e.g., `gpt-4`, `gpt-3.5-turbo`, or an OSS-compatible endpoint).
+
+---
+
 ## 📦 Phase 1 – MVP Features
 - Public chatbot UI (Streamlit)
 - Answers common questions about:
