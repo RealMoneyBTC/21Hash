@@ -1,54 +1,39 @@
 import streamlit as st
 import requests
 
-# Verified correct Hugging Face Inference API URL
-api_url = "https://api-inference.huggingface.co/models/gpt2"
+# Using public Space API endpoint
+api_url = "https://huggingface.co/spaces/project-baize/chat-with-baize/api/predict/"
 
 st.set_page_config(page_title="21Hash - Bitcoin Mining Assistant", layout="wide")
-
 st.title("🧠 21Hash: Open-Source Bitcoin Mining Assistant")
 st.markdown("Ask anything about Bitcoin mining hardware, firmware, setup, or optimization.")
 
 with st.sidebar:
-    st.markdown("## Settings")
-    st.markdown("This version connects to Hugging Face Inference API (GPT-2 public model).")
+    st.markdown("### ⚙️ Demo Powered by Public HF Space")
     st.markdown("---")
-    st.markdown("### 🔐 Privacy")
-    st.markdown(
-        "No IP addresses or personal identifiers are collected. Prompts are sent to Hugging Face Inference API."
-    )
-    st.markdown("---")
-    st.markdown("Created by the community for the community. [GitHub Repo](https://github.com/RealMoneyBTC/21Hash)")
+    st.markdown("▶️ No API key required — working out-of-the-box")
 
-def query_huggingface(prompt):
-    headers = {"Authorization": f"Bearer {st.secrets['HF_TOKEN']}"}
+def query_public_space(prompt):
     try:
-        response = requests.post(api_url, headers=headers, json={"inputs": prompt})
-        if response.status_code == 200:
-            result = response.json()
-            if isinstance(result, list):
-                return result[0]["generated_text"]
-            else:
-                return str(result)
+        payload = {"data": [prompt]}
+        resp = requests.post(api_url, json=payload)
+        if resp.status_code == 200:
+            return resp.json()["data"][0]
         else:
-            st.error(f"API error: {response.status_code} {response.text}")
+            st.error(f"API error: {resp.status_code} {resp.text}")
             return None
     except Exception as e:
-        st.error(f"Exception: {str(e)}")
+        st.error(f"Exception: {e}")
         return None
 
-# Chat input and output
 user_input = st.chat_input("Ask your Bitcoin mining question here...")
-
 if user_input:
     with st.chat_message("user"):
         st.markdown(user_input)
-
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
-            prompt = f"You are a Bitcoin mining expert. {user_input}"
-            reply = query_huggingface(prompt)
+            reply = query_public_space(user_input)
             if reply:
                 st.markdown(reply)
             else:
-                st.error("No valid response received from the model.")
+                st.error("No valid response received.")
