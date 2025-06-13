@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-# Hugging Face Inference API with public GPT-2 model
+# Verified correct Hugging Face Inference API URL
 api_url = "https://api-inference.huggingface.co/models/gpt2"
 
 st.set_page_config(page_title="21Hash - Bitcoin Mining Assistant", layout="wide")
@@ -29,7 +29,7 @@ def query_huggingface(prompt):
             if isinstance(result, list):
                 return result[0]["generated_text"]
             else:
-                return result.get("generated_text", str(result))
+                return str(result)
         else:
             st.error(f"API error: {response.status_code} {response.text}")
             return None
