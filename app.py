@@ -1,6 +1,5 @@
 import streamlit as st
 import openai
-import os
 from datetime import datetime
 import json
 
@@ -23,7 +22,7 @@ with st.sidebar:
     st.markdown(
         "We do **not** collect IP addresses, usernames, or any personal identifiers. "
         "All logged questions and answers are anonymous and used solely to improve the assistant "
-        "for the Bitcoin mining community. This is an open-source, community-first project."
+        "for the Bitcoin mining community."
     )
     st.markdown("---")
     st.markdown("Created by the community for the community. [GitHub Repo](https://github.com/RealMoneyBTC/21Hash)")
@@ -58,7 +57,7 @@ def log_interaction(question, answer):
     try:
         with open("chat_log.json", "a") as f:
             f.write(json.dumps(log_entry) + "\n")
-    except Exception as e:
+    except Exception:
         st.error("⚠️ Could not save interaction log.")
 
 # Chat input logic
@@ -73,7 +72,7 @@ if user_input:
     with st.chat_message("assistant"):
         try:
             response = openai.ChatCompletion.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 temperature=temperature,
                 messages=[
                     {"role": "system", "content": prompt_context},
@@ -84,5 +83,5 @@ if user_input:
             st.markdown(answer)
             st.session_state.messages.append({"role": "assistant", "content": answer})
             log_interaction(user_input, answer)
-        except Exception as e:
+        except Exception:
             st.error("⚠️ There was an error generating a response.")
