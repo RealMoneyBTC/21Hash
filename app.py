@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Hugging Face Inference API URL
-api_url = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
+api_url = "https://api-inference.huggingface.co/models/openchat/openchat-3.5-1210"
 
 # Streamlit app config
 st.set_page_config(page_title="21Hash - Bitcoin Mining Assistant", layout="wide")
