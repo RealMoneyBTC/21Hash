@@ -12,7 +12,7 @@ It learns from manuals, logs, config files, and community input to help:
 ---
 
 ## 🚀 Mission
-**Empower every miner—large or small—to operate smarter, more efficient, and more resilient Bitcoin mining setups through open-source AI and community intelligence.** 
+**Empower every miner—large or small—to operate smarter, more efficient, and more resilient Bitcoin mining setups through open-source AI and community intelligence.**
 
 **21Hash exists not only to solve today's challenges, but to help evolve Bitcoin mining hardware, software, and infrastructure—openly, globally, and sustainably—for the next 100 years.**
 
@@ -24,7 +24,7 @@ It learns from manuals, logs, config files, and community input to help:
 
 ## 💡 Why 21Hash?
 - **Bitcoin-Native**: Named after Bitcoin’s 21 million hard cap
-- **AI-First**: Uses GPT models and RAG pipelines to learn and improve
+- **AI-First**: Uses GPT models, Hugging Face OSS models, and RAG pipelines to learn and improve
 - **Open-Source**: Transparent, auditable, and extensible
 - **Community-Driven**: Learns from real-world miner data and contributions
 - **Future-Focused**: Built to inspire the long-term evolution of mining systems across the industry
@@ -44,11 +44,10 @@ It learns from manuals, logs, config files, and community input to help:
 ---
 
 ## 🧠 How It Learns
-
 21Hash is designed to continuously evolve through a layered learning approach:
 
 ### Phase 1 – Static Prompting (Now)
-- Uses a pre-engineered system prompt and GPT-4
+- Uses a pre-engineered system prompt and GPT-3.5-turbo or Hugging Face OSS model
 - Answers drawn from curated mining manuals, firmware docs, and optimization guides
 
 ### Phase 2 – Community-Driven Learning (Next)
@@ -66,16 +65,29 @@ This progressive learning loop allows 21Hash to grow smarter over time, while st
 ---
 
 ## ⚡ Model Use in Phase 1
-
-21Hash defaults to **gpt-3.5-turbo** in Phase 1. This ensures cost efficiency while providing strong answers for most Bitcoin mining questions.
+21Hash defaults to **gpt-3.5-turbo** (via OpenAI) or **Mistral-7B Instruct** (via Hugging Face) in Phase 1. This ensures cost efficiency while providing strong answers for most Bitcoin mining questions.
 
 - **gpt-3.5-turbo**: Fast, affordable, suitable for typical hardware, firmware, and setup Q&A.
+- **Mistral-7B / Mixtral / OpenChat (Hugging Face)**: Free or low-cost OSS alternatives, good for general mining knowledge.
 - **gpt-4**: Higher cost, deeper reasoning, better for complex or edge-case queries (optional for those running their own version).
 
-We have chosen to use OpenAI models initially to focus on rapid deployment, reliability, and proven performance. Our intention is to transition toward **open-source models** (e.g., LLaMA, Mistral, Mixtral) in future phases to further decentralize and democratize mining intelligence. The timeframe for this transition is dependent on community support and technical milestones but is a core long-term goal.
+We chose this setup for rapid deployment, reliability, and to encourage open-source alignment. Our intention is to transition toward **fully open-source models** in future phases to further decentralize and democratize mining intelligence.
 
-### Using Other Models
-Those deploying 21Hash from this repo are free to adjust the model configuration. In `app.py`, simply change the `model=` parameter in the OpenAI API call to your desired model (e.g., `gpt-4`, `gpt-3.5-turbo`, or an OSS-compatible endpoint).
+---
+
+## Using Other Models
+Those deploying 21Hash from this repo are free to adjust the model configuration.
+
+✅ **OpenAI**: In `app.py`, change the `model=` parameter to your desired OpenAI model.
+
+✅ **Hugging Face**: In `app.py`, update the `api_url` value to your chosen Hugging Face Space or Inference API endpoint. If using a private Space, add your Hugging Face API token to Streamlit Secrets.
+
+Example:
+```python
+api_url = "https://api-inference.huggingface.co/models/openchat/openchat-3.5-1210"
+```
+
+This structure ensures 21Hash remains flexible for different OSS models and providers.
 
 ---
 
@@ -95,7 +107,7 @@ Those deploying 21Hash from this repo are free to adjust the model configuration
 ## 🗺 Roadmap
 | Phase | Goal |
 |-------|------|
-| 1 | Q&A chatbot with prompt-tuned GPT-4 + Streamlit UI |
+| 1 | Q&A chatbot with prompt-tuned GPT-3.5-turbo / HF OSS model + Streamlit UI |
 | 2 | Logging + feedback + user-submitted config/log parsing |
 | 3 | Smart miner analysis tool: config → recommendation engine |
 | 4 | Integration with real dashboards (BraiinsOS, WhatsMiner Tool) |
@@ -113,7 +125,7 @@ We're looking for help with:
 
 ### Contribute your logs, configs, questions, or ideas → Help 21Hash learn.
 
-MIT licensed, Bitcoin-native, AI-powered. 
+MIT licensed, Bitcoin-native, AI-powered.
 Let’s build this together.
 
 ---
