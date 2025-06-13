@@ -6,7 +6,7 @@ api_url = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Inst
 
 st.set_page_config(page_title="21Hash - Bitcoin Mining Assistant", layout="wide")
 
-st.title("🧠 21Hash: Open Mining Assistant (Hugging Face)")
+st.title("🧠 21Hash: Open Mining Assistant")
 st.markdown("Ask anything about Bitcoin mining hardware, firmware, setup, or optimization.")
 
 with st.sidebar:
