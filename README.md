@@ -1,4 +1,4 @@
-# 21Hash
+# [21Hash](https://21hash.streamlit.app/)
 
 **21Hash** is an open-source AI assistant designed to support and strengthen the global Bitcoin mining community—from industrial-scale farms to solo pleb miners.
 
@@ -8,6 +8,8 @@ It learns from manuals, logs, config files, and community input to help:
 - Share heat reuse strategies
 - Answer technical questions on immersion, undervolting, and tuning
 - Foster an open, collaborative mining intelligence layer
+
+  https://21hash.streamlit.app/ 
 
 ---
 
